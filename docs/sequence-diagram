@@ -1,0 +1,24 @@
+﻿title circuit breaker pattern
+
+materialdesignicons f121 Client
+materialdesignicons f48b Circuit breaker
+materialdesignicons f163 Remote server
+
+Client->Circuit breaker: sends request
+Circuit breaker->Remote server: sends request
+Remote server->Circuit breaker:return response
+Circuit breaker->Client: return response
+
+note over Circuit breaker,Remote server: failure scenario which causes circuit go on open state
+
+Client-->Circuit breaker: sends request
+Circuit breaker-->Remote server: sends request
+
+note over Remote server: <color:#red> ** timeout **</color>
+
+note over Circuit breaker: <color:#red> set circuit to open </color>
+
+Circuit breaker->Client: return failure
+
+Client--#red>Circuit breaker: sends request
+Circuit breaker--#red>Client: return failure (open state)
